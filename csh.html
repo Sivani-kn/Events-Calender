@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science Club Meeting Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            background-image: url('https://images.unsplash.com/photo-1594729095022-e2f6d2eece9c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNvbXB1dGVyJTIwc2NpZW5jZXxlbnwwfHwwfHx8MA%3D%3D'); /* Computer Science background */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #3498db;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Computer Science Club Meeting</h1>
+        <p><strong>Date:</strong> <span id="event-date"></span></p>
+        <p><strong>Category:</strong> Club Meeting</p>
+        <p id="event-description"></p>
+        <p>Join us for our weekly meeting to discuss exciting upcoming projects, learn new technologies, and plan engaging events for the club. Whether you're a seasoned coder or just starting your journey in computer science, all are welcome!</p>
+        <a href="Homepage.html" class="back-link">Back to Calendar</a>
+    </div>
+
+    <script>
+        // Get the date and description from the URL parameters (if passed)
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventDate = urlParams.get('date');
+        const eventDescription = urlParams.get('description');
+
+        // Set the date and description on the page
+        document.getElementById('event-date').textContent = eventDate || '2025-09-15'; // Default date
+        document.getElementById('event-description').textContent = eventDescription || 'Weekly meeting to discuss upcoming projects and events.'; // Default description
+    </script>
+</body>
+</html>

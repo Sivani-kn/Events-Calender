@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Exam Schedule Release Details</title>
+    <style>
+        /* Basic styling, you can customize this */
+        body { font-family: sans-serif; margin: 20px; background-color: #f5f5f5;
+        
+        background-image:url('https://media.istockphoto.com/id/525409577/photo/elevated-view-of-students-writing-their-gcse-exam.jpg?s=612x612&w=0&k=20&c=GYrsKdAtBjK0q2wjkIq8PVOW1wz0c9Qr8KjA6o-R1v0=');}
+        .container { max-width: 800px; margin: auto; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #856404; }
+        .back-link { display: block; margin-top: 20px; color: #856404; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Final Exam Schedule Release</h1>
+        <p><strong>Date:</strong> <span id="event-date"></span></p>
+        <p><strong>Category:</strong> Academic Deadline</p>
+        <p id="event-description"></p>
+        <p>The fall semester final exam schedule will be published on this date. Make sure to check it to plan your studies.</p>
+        <a href="Homepage.html" class="back-link">Back to Calendar</a>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('event-date').textContent = urlParams.get('date') || '2026-04-01';
+        document.getElementById('event-description').textContent = urlParams.get('description') || 'Fall semester final exam schedule will be published.';
+    </script>
+</body>
+</html>

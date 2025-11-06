@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debate Society Practice Details</title>
+    <style>
+        /* Basic styling, you can customize this */
+        body { font-family: sans-serif; margin: 20px; background-color: #f5f5f5;
+        background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230306/pngtree-politicians-participating-in-political-debate-photo-image_1814521.jpg'); }
+        .container { max-width: 800px; margin: auto; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #155724; }
+        .back-link { display: block; margin-top: 20px; color: #155724; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Debate Society Practice</h1>
+        <p><strong>Date:</strong> <span id="event-date"></span></p>
+        <p><strong>Category:</strong> Club Meeting</p>
+        <p id="event-description"></p>
+        <p>Join the Debate Society for a practice session as we prepare for the upcoming intercollegiate debate competition. All skill levels are welcome!</p>
+        <a href="Homepage.html" class="back-link">Back to Calendar</a>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('event-date').textContent = urlParams.get('date') || '2025-09-30';
+        document.getElementById('event-description').textContent = urlParams.get('description') || 'Practice session for upcoming intercollegiate debate competition.';
+    </script>
+</body>
+</html>

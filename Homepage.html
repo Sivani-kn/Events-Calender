@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Calendar</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        select,
+        input,
+        button {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-date {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .event-title {
+            font-size: 18px;
+            margin: 5px 0;
+            color: #3498db;
+        }
+
+        .event-category {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: #eee;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .club {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .sports {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .academic {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .social {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .event-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .no-events {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 40px;
+            color: #666;
+        }
+
+        /* Modal styles (Kept in HTML but not used by JS now) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .filters {
+                flex-direction: column;
+            }
+
+            .filter-group {
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>College Event Calendar 📅</h1>
+            <p>Stay updated with all upcoming campus events</p>
+        </header>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label for="category-filter">Filter by Category:</label>
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="club">Club Meetings</option>
+                    <option value="sports">Sports Events</option>
+                    <option value="academic">Academic Deadlines</option>
+                    <option value="social">Social Events</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="date-filter">Filter by Date:</label>
+                <input type="date" id="date-filter">
+                <button id="clear-date">Clear Date</button>
+            </div>
+
+            <button id="reset-filters">Reset All Filters</button>
+        </div>
+
+        <div class="calendar" id="event-calendar">
+            </div>
+    </div>
+
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p><strong id="modal-category"></strong></p>
+            <p id="modal-date"></p>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+
+    <script>
+        // Sample event data
+        const events = [
+            {
+                id: 1,
+                title: "Computer Science Club Meeting",
+                date: "2025-09-15",
+                category: "club",
+                description: "Weekly meeting to discuss upcoming projects, including the annual hackathon and new AI research group formation. Location: Engineering Hall, Room 402, 6:00 PM."
+            },
+            {
+                id: 2,
+                title: "Basketball Tournament Finals",
+                date: "2025-11-18",
+                category: "sports",
+                description: "Championship game between Engineering and Business schools. Come support your team! Tip-off is at 7:30 PM in the Main Gymnasium."
+            },
+            {
+                id: 3,
+                title: "Midterm Paper Submission",
+                date: "2025-10-20",
+                category: "academic",
+                description: "Deadline for submitting midterm papers in all Humanities courses. Submissions must be uploaded to the campus portal before 11:59 PM."
+            },
+            {
+                id: 4,
+                title: "International Food Festival",
+                date: "2026-02-22",
+                category: "social",
+                description: "Celebrate cultural diversity with food from around the world. Tickets available at the student union. Event runs from 11:00 AM to 3:00 PM on the campus lawn."
+            },
+            {
+                id: 5,
+                title: "Debate Society Practice",
+                date: "2025-09-30",
+                category: "club",
+                description: "Practice session for upcoming intercollegiate debate competition. All members are required to attend. Focus on foreign policy topic this week. Location: Library Auditorium."
+            },
+            {
+                id: 6,
+                title: "Swimming Competition",
+                date: "2026-03-05",
+                category: "sports",
+                description: "Annual college swimming championship at the campus pool. Relay races and individual events. Warm-ups start at 4:00 PM, competition at 5:00 PM."
+            },
+            {
+                id: 7,
+                title: "Final Exam Schedule Release",
+                date: "2026-04-01",
+                category: "academic",
+                description: "Spring semester final exam schedule will be officially published on the registrar's website. Plan your study time accordingly!"
+            },
+            {
+                id: 8,
+                title: "Music Club Concert",
+                date: "2026-05-10",
+                category: "social",
+                description: "End-of-semester performance by the college music club, featuring rock, jazz, and classical ensembles. Tickets are $5 at the door. Start time: 8:00 PM."
+            }
+        ];
+
+        // DOM elements
+        const calendarEl = document.getElementById('event-calendar');
+        const categoryFilter = document.getElementById('category-filter');
+        const dateFilter = document.getElementById('date-filter');
+        const clearDateBtn = document.getElementById('clear-date');
+        const resetFiltersBtn = document.getElementById('reset-filters');
+        // const modal = document.getElementById('event-modal'); // Modal elements are no longer needed for these 8 events
+        // const closeModalBtn = document.getElementById('close-modal');
+        // const modalTitle = document.getElementById('modal-title');
+        // const modalCategory = document.getElementById('modal-category');
+        // const modalDate = document.getElementById('modal-date');
+        // const modalDescription = document.getElementById('modal-description');
+
+        /** Helper function to map category key to display name */
+        function getCategoryName(category) {
+            const names = {
+                'club': 'Club Meeting',
+                'sports': 'Sports Event',
+                'academic': 'Academic Deadline',
+                'social': 'Social Event'
+            };
+            return names[category] || category;
+        }
+
+        /** Function to display events */
+        function displayEvents(eventsToDisplay) {
+            calendarEl.innerHTML = '';
+
+            eventsToDisplay.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            if (eventsToDisplay.length === 0) {
+                calendarEl.innerHTML = '<div class="no-events">No events found matching your filters. Try clearing the date or selecting "All Categories."</div>';
+                return;
+            }
+
+            eventsToDisplay.forEach(event => {
+                const eventDate = new Date(event.date);
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = eventDate.toLocaleDateString('en-US', options);
+
+                const eventCard = document.createElement('div');
+                eventCard.className = 'event-card';
+                eventCard.innerHTML = ` 
+                    <div class="event-date">${formattedDate}</div>
+                    <div class="event-category ${event.category}">${getCategoryName(event.category)}</div>
+                    <h3 class="event-title">${event.title}</h3>
+                    <p class="event-description">${event.description.substring(0, 75)}...</p>
+                `;
+
+                // Add click event to open modal or redirect
+                eventCard.addEventListener('click', () => {
+                    openModal(event);
+                });
+
+                calendarEl.appendChild(eventCard);
+            });
+        }
+
+        /** Function to filter events based on selected criteria */
+        function filterEvents() {
+            const selectedCategory = categoryFilter.value;
+            const selectedDate = dateFilter.value;
+
+            let filteredEvents = [...events];
+
+            // Filter by category
+            if (selectedCategory !== 'all') {
+                filteredEvents = filteredEvents.filter(event => event.category === selectedCategory);
+            }
+
+            // Filter by date (YYYY-MM-DD comparison)
+            if (selectedDate) {
+                filteredEvents = filteredEvents.filter(event => event.date === selectedDate);
+            }
+
+            displayEvents(filteredEvents);
+        }
+
+        /**
+         * Function to redirect to a dedicated details page for ALL 8 events.
+         */
+        function openModal(event) {
+            
+            const eventDescription = encodeURIComponent(event.description);
+            const eventDate = event.date;
+
+            // REDIRECTION LOGIC FOR ALL 8 EVENTS
+            let detailsPage = '';
+
+            if (event.id === 1) {
+                detailsPage = 'csh.html'; 
+            } else if (event.id === 2) {
+                detailsPage = 'basketball.html'; 
+            } else if (event.id === 3) { // *** NEW: Midterm Paper Submission ***
+                detailsPage = 'midterm.html'; 
+            } else if (event.id === 4) {
+                detailsPage = 'food.html'; 
+            } else if (event.id === 5) {
+                detailsPage = 'debate.html'; 
+            } else if (event.id === 6) { // *** NEW: Swimming Competition ***
+                detailsPage = 'Swim.html';
+            } else if (event.id === 7) {
+                detailsPage = 'finalexam.html';
+            } else if (event.id === 8) { // *** NEW: Music Club Concert ***
+                detailsPage = 'music.html';
+            }
+            
+            if (detailsPage) {
+                window.location.href = `${detailsPage}?date=${eventDate}&description=${eventDescription}`;
+            }
+            
+            // NOTE: The original modal display code is now redundant and removed from this function, 
+            // as all events are now handled by the redirection logic above.
+        }
+
+        // --- Initialization and Event Listeners ---
+
+        // Display all events initially
+        displayEvents(events);
+
+        // Event listeners for filters
+        categoryFilter.addEventListener('change', filterEvents);
+        dateFilter.addEventListener('change', filterEvents);
+        
+        clearDateBtn.addEventListener('click', () => {
+            dateFilter.value = '';
+            filterEvents();
+        });
+        
+        resetFiltersBtn.addEventListener('click', () => {
+            categoryFilter.value = 'all';
+            dateFilter.value = '';
+            filterEvents();
+        });
+
+        // NOTE: Modal listeners are removed as the modal is no longer used for any event.
+
+    </script>
+
+    </body>
+
+</html>

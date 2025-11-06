@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm Paper Submission Details</title>
+    <style>
+        /* Basic styling, you can customize this */
+        body { font-family: sans-serif; margin: 20px; background-color: #f5f5f5; 
+        background-image: url('https://www.pankajkumarseo.com/wp-content/uploads/2022/06/Free-Photo-Sharing-Submission-Sites-Lists.png');}
+        .container { max-width: 800px; margin: auto; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #856404; }
+        .back-link { display: block; margin-top: 20px; color: #856404; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Midterm Paper Submission</h1>
+        <p><strong>Date:</strong> <span id="event-date"></span></p>
+        <p><strong>Category:</strong> Academic Deadline</p>
+        <p id="event-description"></p>
+        <p>Remember to submit your midterm papers for all Humanities courses by this deadline.</p>
+        <a href="Homepage.html" class="back-link">Back to Calendar</a>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('event-date').textContent = urlParams.get('date') || '2025-10-20';
+        document.getElementById('event-description').textContent = urlParams.get('description') || 'Deadline for submitting midterm papers in Humanities courses.';
+    </script>
+</body>
+</html>

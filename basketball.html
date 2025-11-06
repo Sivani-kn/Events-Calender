@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Tournament Finals Details</title>
+    <style>
+        /* Basic styling, you can customize this */
+        body { font-family: sans-serif; margin: 20px; background-color: #f5f5f5; 
+        background-image:url('https://www.vigliancohoops.com/wp-content/uploads/2012/07/The-best-top-desktop-basketball-wallpapers-basketball-wallpaper-basketball-background-1-basket-and-ball.jpg'); }
+        .container { max-width: 800px; margin: auto; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #004085; }
+        .back-link { display: block; margin-top: 20px; color: #004085; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Basketball Tournament Finals</h1>
+        <p><strong>Date:</strong> <span id="event-date"></span></p>
+        <p><strong>Category:</strong> Sports Event</p>
+        <p id="event-description"></p>
+        <p>Witness the thrilling championship game between the Engineering and Business schools. Come support your team!</p>
+        <a href=Homepage.html" class="back-link">Back to Calendar</a>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('event-date').textContent = urlParams.get('date') || '2025-11-18';
+        document.getElementById('event-description').textContent = urlParams.get('description') || 'Championship game between Engineering and Business schools.';
+    </script>
+</body>
+</html>
