@@ -2,7 +2,7 @@ This project is a comprehensive College Event Calendar system. It features a sec
 
 🎓 College Event Calendar sleek, responsive web application designed to help students stay organized and engaged with campus life. This project demonstrates front-end development skills, including dynamic DOM manipulation, URL parameter handling, and responsive UI/UX design.
 
-🌟 Key Features
+**🌟 Key Features**
 Secure Entry: A dedicated login page (Loginpage.html) requiring authentication to access the calendar.
 Dynamic Dashboard: The Homepage.html serves as a central hub where users can:
     Filter by Category: Toggle between Club Meetings, Sports, Academic Deadlines, and Social Events.
@@ -10,12 +10,12 @@ Dynamic Dashboard: The Homepage.html serves as a central hub where users can:
 Interactive Detail Pages: Every event has its own uniquely styled detail page (e.g., csh.html, basketball.html, music.html) that pulls specific data like dates and descriptions using JavaScript URL parameters.
 Thematic Design: Each page features custom background imagery and color schemes that match the event's vibe (e.g., musical notes for the concert, court-side views for basketball).
 
-🛠️ Technology Stack
+**🛠️ Technology Stack**
 HTML5: Semantic structure for all pages.
 CSS3: Custom styling with a focus on glassmorphism (rgba backgrounds), flexbox, and grid layouts.
 JavaScript (ES6+):Dynamic event rendering and filtering logic,URL state management via URLSearchParams,Form validation for the login portal.
 
-📂 Project Structure
+**📂 Project Structure**
 Loginpage.html-The gateway to the app with simulated authentication.
 Homepage.html-The main dashboard featuring the filterable event grid.csh.html-Details for Computer Science Club meetings.
 midterm.html-Academic deadline tracking for Humanities papers.
@@ -26,14 +26,14 @@ Swim.html-Sports event page for the swimming championship.
 finalexam.html-Important academic schedule release details.
 music.html-Social event details for the Music Club concert.
 
-🚀 How to RunClone this repository to your local machine.
+**🚀 How to RunClone this repository to your local machine.**
 Open Loginpage.html in any modern web browser.
 Credentials-Username: user,Password: password
 Explore the calendar, apply filters, and click on any event card to see its specific details!
 
 📸 Preview-The application uses a responsive grid layout. On mobile, the filters stack vertically for easy access, and the event cards adapt to any screen size.
 
-Future Improvements
+**Future Improvements**
 While the current version provides a solid foundation for an event management system, the following features are planned for future releases to enhance scalability and user engagement:
 
 1. Persistent Backend Integration
@@ -65,7 +65,7 @@ Goal: Add a button to generate .ics files or direct links to Google Calendar/Out
 
 Benefit: Seamlessly sync campus life with a student's personal digital schedule.
 
-🧠 Technical Challenges & Solutions
+**🧠 Technical Challenges & Solutions**
 The Challenge: Data Persistence Across Pages
 One of the main hurdles in a purely front-end project is passing data from the Homepage.html to specific detail pages like music.html without a database.
 
